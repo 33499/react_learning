@@ -1,0 +1,116 @@
+## 一、todoList案例相关知识点
+    1. 拆分组件、实现静态组件。注意className、style的用法
+    2.动态初始化列表，如何确定将数据放在哪里组件的state中
+        ——某个组件使用：放在其自身的state中
+        ——某些组件使用：放在他们共同的父组件state中
+    3.关于父子之间通信:
+    1.【父组件】给【子组件】传递数据:通过props传递
+    2.【子组件】给【父组件】传递数据: 通过props传递,要求夫提前给子传递一个函数
+    4.注意defaultChecked和checked的区别,类似的还有：defaultValue和value
+    5.状态在哪里,操作状态的方法就在哪里
+## 二、
+## 三、路由的基本使用
+    1.明确好界面的导航区,展示区
+    2.导航区的a标签改为Link标签
+        <link to="/xxxx">Demo</Link>
+    3.展示区写Route标签进行路径的匹配
+        <Route path='/xxxx' component={Demo}>/>
+    4.<App>的最外侧包裹一个<BrowerRouter>或<HashRouter>
+## 四、路由组件与一般组件
+    1.写法不同:
+        一般组件: <Demo/>
+        路由组件: <Route path='/xxxx' component={Demo}>/>
+    2.存放位置不同:
+        一般组件：components
+        路由组件: pages
+    3.接收到的props不同:
+        一般组件:写组件标签时传递了什么，就能收到什么
+        路由组件:接收到三个固定的属性
+        history:
+            go: ƒ go(n)
+            goBack: ƒ goBack()
+            goForward: ƒ goForward()
+            push: ƒ push(path, state)
+            replace: ƒ replace(path, state)
+    
+        location:
+            pathname: "/home"
+            search: ""
+            state: undefined
+    
+        match:
+            params: {}
+            path: "/home"
+            url: "/home"
+## 五、NavLink与封装NavLink
+        1.Navlink可以实现路由链接的高亮,通过activateClassName指定样式名
+        2.标签体内容是一个特殊的标签属性
+        3.通过this.props.children可以获取标签体内容
+## 六、Switch的使用
+        1.通常情况下，path和component是一一对应的关系
+        2.Switch可以提高路由匹配效率(单一匹配)
+## 七、解决多级路径刷新页面样式丢失的问题
+        1.去掉.
+        2.改成"%PUBLIC_URL%/css/bootstrap.css"
+        3.使用HashRouter，#号后面的不考虑为前端资源
+## 八、默认的严格匹配和模糊匹配
+        1.默认使用的是模糊匹配
+        2.开启严格匹配：<Route exact={true} path="/about" component={About}>
+        3.严格匹配不用随便开
+## 九、Redirect的使用
+        1.一般写在所有路由注册的最下方，当所有路由都无法匹配时，跳转到Redirect指定的路由
+        2.具体编码：
+            <Switch>
+                <Route exact={true} path="/about" component={About}/>
+                <Route exact={true} path="/home" component={Home}/>
+                <Redirect to="/about"/>
+            </Switch>
+## 十、嵌套路由
+        1.注册子路由时要写上父路由的Path值
+        2.路由的匹配是按照注册路由的顺序进行的
+## 十一、向路由组件传递参数
+        1.params参数
+            路由链接(携带参数):<Link to='/demo/test/tom/18'>详情</Link>
+            注册路由(声明接收):<Route path='/demo/test/:name/:age' component={Test}/>
+            接收参数:const {id,title}: this.props.match.params
+        2.search参数
+            路由链接(携带参数):<Link to='/demo/test?name=tom&age=18'>详情</Link>
+            注册路由(无需声明，正常注册即可):<Route path='/demo/test/' component={Test}/>
+            接收参数:const {search} = this.props.location
+            备注：获取到的search是urlencoded编码字符串，需要借助querystring解析
+        3.state参数
+            路由链接(携带参数):<Link to={{path:'/demo/test',state:{name:'tom',age:18}}>详情</Link>
+            注册路由(无需声明，正常注册即可):<Route path='/demo/test/' component={Test}/>
+            接收参数:const {} = this.props.location.state
+            备注：刷新也可以保留参数
+## 十二 编程式路由导航
+        借助this.props.history对象上的Api对操作路由由跳转\前进\后退
+            -this.props.history.push()
+            -this.props.history.replace()
+            -this.props.history.goback()
+            -this.props.history.goForward()
+            -this.props.history.go()
+## 十三 BrowerRouter与HashRouter的区别
+        1.底层原理不一样
+        2.path表现形式不一样
+            BrowerRouter没有#
+            HashRouter有#
+        3.刷新后对路由由state参数的影响
+            (1) BrowerRouter没有任何影响,因为state保存在history对象中
+            (2) HashRouter刷新后会导致路由state参数的丢失
+        4.备注:HashRouter解决样式丢失问题
+## 十四 antd的按需引入+自定主题
+
+![img](C:\Users\ysx\Desktop\react_staging\CW[ANA86QYB71W`WE`)TI)R.png)
+
+![image-20210219214009514](C:\Users\ysx\AppData\Roaming\Typora\typora-user-images\image-20210219214009514.png)
+
+
+## npm add react-router-dom
+## npm add pubsub-js
+## npm add axios
+## npm add prop-types
+## npm add antd
+## npm add nanoid 生成uuid标识
+## 1. create-react-app hello-react 2. cd hello-react 3. npm start
+
