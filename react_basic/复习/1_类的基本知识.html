@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>1_类的基本知识</title>
+</head>
+<body>
+    <script type="text/javascript" >
+        //创建一个Person类
+        class Person {
+            na = null
+            //构造器方法
+            constructor(name, age){
+                this.name=name
+                this.age=age
+            }
+            //一般方法
+            speak(){
+                console.log('${this.name},${this.age}');
+            }
+        }
+        class Student extends Person {
+            constructor(name,age,grade){
+                super(name, age)
+                this.grade=grade
+            }
+            speak(){
+                console.log('${this.name},${this.age},${this.grade}');
+            }
+        }
+        //创建一个Person的实列对象
+        const p1 = new Person('jhsd',8)
+        const p2 = new Person('jdk',3)
+        const p3 = new Person()
+        p3.name='hjk'
+        const s1 = new Student('小张',15,'高一')
+        console.log(p1);
+        console.log(p2);
+        console.log(p3);
+        p1.speak()
+        p2.speak()
+        s1.speak()
+
+    </script>
+</body>
+</html>
